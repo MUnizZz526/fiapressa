@@ -1,6 +1,6 @@
 # 🍔 FIAPressa - Cardápio Digital
 
-O **FIAPressa** é um aplicativo mobile desenvolvido em **React Native** com **Expo Router**, focado na agilidade do atendimento para lanchonetes. O projeto permite navegar entre categorias, visualizar detalhes de produtos e gerenciar o status de pedidos de forma intuitiva.
+O **FIAPressa** é um aplicativo mobile desenvolvido em **React Native** com **Expo Router**, focado na agilidade do atendimento para lanchonete da faculdade. O projeto permite navegar entre categorias, visualizar detalhes de produtos e gerenciar o status de pedidos de forma intuitiva.
 
 ---
 
