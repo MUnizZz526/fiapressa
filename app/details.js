@@ -4,10 +4,12 @@ import { Colors } from '../constants/Colors';
 
 export default function Details() {
   const [cartapacio, setCartapacio] = useState([
+
     { id: '1', nome: 'Pão de Queijo', preco: 'R$ 6,00' },
     { id: '2', nome: 'Coxinha de Frango', preco: 'R$ 8,50' },
     { id: '3', nome: 'Suco Natural 300ml', preco: 'R$ 10,00' },
     { id: '4', nome: 'Sanduíche Natural', preco: 'R$ 12,00' },
+    
   ]);
 
   const handleOrder = (item) => {
