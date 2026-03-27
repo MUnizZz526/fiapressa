@@ -35,7 +35,7 @@ O **FIAPressa** é um aplicativo mobile desenvolvido em **React Native** com **E
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/MUnizZz526/fiapressa.git](https://github.com/MUnizZz526/fiapressa.git)
+    git clone https://github.com/MUnizZz526/fiapressa.git
     ```
 2.  Entre na pasta:
     ```bash
