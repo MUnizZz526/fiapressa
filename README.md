@@ -43,11 +43,11 @@ Escolhemos a operação de **Lanchonete/Restaurante da FIAP**. A escolha justifi
 ### Passo a Passo
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/usuario/fiap-cpad-cp2-fiapressa
+    git clone https://github.com/MUnizZz526/fiapressa.git
     ```
 2.  **Acesse a pasta:**
     ```bash
-    cd fiap-cpad-cp2-fiapressa
+    cd fiapressa
     ```
 3.  **Instale as dependências:**
     ```bash
@@ -62,15 +62,9 @@ Escolhemos a operação de **Lanchonete/Restaurante da FIAP**. A escolha justifi
 ---
 
 ## d) Demonstração Visual
-> **⚠️ IMPORTANTE:** Substitua os links abaixo pelos caminhos reais das suas imagens e vídeos.
 
 ### Prints das Telas
-| Login | Cardápio (Meta) | Detalhes do Produto | Carrinho |
-| :---: | :---: | :---: | :---: |
-| ![Login](https://via.placeholder.com/200x400?text=Tela+Login) | ![Menu](https://via.placeholder.com/200x400?text=Cardapio) | ![Detalhes](https://via.placeholder.com/200x400?text=Detalhes) | ![Pedidos](https://via.placeholder.com/200x400?text=Carrinho) |
-
-### Fluxo Completo (Vídeo/GIF)
-[![Assista ao vídeo](https://img.shields.io/badge/YouTube-Assistir%20Demonstração-red?style=for-the-badge&logo=youtube)](LINK_DO_SEU_VIDEO_AQUI)
+<img width="1080" height="2400" alt="cp2" src="https://github.com/user-attachments/assets/e851e98e-ffa8-4602-9d4d-09f81c90fc9a" />
 
 ---
 
