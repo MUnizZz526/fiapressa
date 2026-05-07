@@ -64,7 +64,9 @@ Escolhemos a operação de **Lanchonete/Restaurante da FIAP**. A escolha justifi
 ## d) Demonstração Visual
 
 ### Prints das Telas
-<img width="1080" height="2400" alt="cp2" src="https://github.com/user-attachments/assets/e851e98e-ffa8-4602-9d4d-09f81c90fc9a" />
+
+<img width="1080" height="2400" alt="cp2" src="https://github.com/user-attachments/assets/52798d35-d908-4cf9-b36f-668b9d511aa0" />
+
 
 ---
 
