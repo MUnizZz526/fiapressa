@@ -16,4 +16,4 @@ export default function Layout() {
       <Stack.Screen name="profile" options={{ title: 'Meus Pedidos' }} />
     </Stack>
   );
-}a
+}
