@@ -1,19 +1,39 @@
 import { Stack } from 'expo-router';
-import { Colors } from '../constants/Colors';
+import { AuthProvider, AuthContext } from '../context/AuthContext';
+import { useContext, useEffect } from 'react';
+import { useRouter, useSegments } from 'expo-router';
 
-export default function Layout() {
+function RootLayoutNav() {
+  const { user, loading } = useContext(AuthContext);
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (!user && !inAuthGroup) {
+      router.replace('/');
+    } else if (user && segments[0] !== 'details') {
+      router.replace('/details');
+    }
+  }, [user, loading]);
+
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: { backgroundColor: Colors.primary },
-        headerTintColor: '#fff',
-        headerTitleStyle: { fontWeight: 'bold' },
-        headerTitle: 'FIAPressa',
-      }}
-    >
-      <Stack.Screen name="index" options={{ title: 'Início' }} />
-      <Stack.Screen name="details" options={{ title: 'Cardápio Digital' }} />
-      <Stack.Screen name="profile" options={{ title: 'Meus Pedidos' }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="details" />
+      <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="checkout" />
     </Stack>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
   );
 }

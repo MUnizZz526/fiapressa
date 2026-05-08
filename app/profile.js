@@ -1,52 +1,49 @@
-import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { Colors } from '../constants/Colors';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { AuthContext } from '../context/AuthContext'; 
 
 export default function Profile() {
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsReady(true), 5000); // 5 segundos para "ficar pronto"
-    return () => clearTimeout(timer);
-  }, []);
+  const { user, orders } = useContext(AuthContext);
+  const totalKcal = orders.reduce((sum, item) => sum + (item.kcal || 0), 0);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.userSection}>
-        <View style={styles.avatar}><Text style={styles.avatarText}>RM</Text></View>
-        <Text style={styles.userName}>RM99999 - Aluno FIAP</Text>
-      </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Meus Pedidos 📝</Text>
+        <View style={styles.stats}>
+          <View style={styles.statBox}><Text style={styles.sL}>PEDIDOS</Text><Text style={styles.sV}>{orders.length}</Text></View>
+          <View style={[styles.statBox, { borderLeftWidth: 1, borderColor: '#333' }]}><Text style={styles.sL}>TOTAL KCAL</Text><Text style={[styles.sV, { color: '#ED145B' }]}>{totalKcal}</Text></View>
+        </View>
 
-      <View style={styles.statusCard}>
-        <Text style={styles.statusTitle}>Status do Pedido Atual:</Text>
-        
-        {!isReady ? (
-          <View style={styles.row}>
-            <ActivityIndicator color={Colors.primary} />
-            <Text style={styles.waitingText}>Preparando seu lanche...</Text>
-          </View>
+        {orders.length === 0 ? (
+          <Text style={styles.empty}>Nenhum pedido realizado hoje.</Text>
         ) : (
-          <View style={styles.readyBox}>
-            <Text style={styles.readyText}>✅ PRONTO PARA RETIRADA!</Text>
-            <Text style={styles.subtext}>Dirija-se ao balcão com seu RM.</Text>
-          </View>
+          orders.map((p, i) => (
+            <View key={i} style={styles.card}>
+              <View>
+                <Text style={styles.name}>{p.name}</Text>
+                <Text style={styles.sub}>{p.data} • {p.kcal} kcal</Text>
+              </View>
+              <View style={styles.status}><Text style={styles.statusT}>Preparando</Text></View>
+            </View>
+          ))
         )}
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 25, backgroundColor: Colors.background },
-  userSection: { alignItems: 'center', marginBottom: 40 },
-  avatar: { width: 80, height: 80, borderRadius: 40, backgroundColor: '#ddd', justifyContent: 'center', alignItems: 'center', marginBottom: 10 },
-  avatarText: { fontWeight: 'bold', color: '#555' },
-  userName: { fontSize: 18, fontWeight: '600' },
-  statusCard: { backgroundColor: Colors.card, padding: 25, borderRadius: 20, width: '100%' },
-  statusTitle: { fontSize: 14, color: Colors.gray, marginBottom: 15 },
-  row: { flexDirection: 'row', alignItems: 'center' },
-  waitingText: { marginLeft: 15, fontSize: 16, fontWeight: '500' },
-  readyBox: { alignItems: 'center' },
-  readyText: { color: Colors.success, fontWeight: 'bold', fontSize: 18 },
-  subtext: { marginTop: 5, color: Colors.gray }
+  container: { padding: 20 },
+  title: { fontSize: 28, fontWeight: 'bold', color: '#fff', marginBottom: 20 },
+  stats: { flexDirection: 'row', backgroundColor: '#1A1A1A', borderRadius: 15, padding: 20, marginBottom: 20, borderWidth: 1, borderColor: '#ED145B' },
+  statBox: { flex: 1, alignItems: 'center' },
+  sL: { color: '#666', fontSize: 10, fontWeight: 'bold' },
+  sV: { color: '#fff', fontSize: 22, fontWeight: 'bold' },
+  card: { backgroundColor: '#1A1A1A', padding: 15, borderRadius: 12, marginBottom: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  name: { color: '#fff', fontWeight: 'bold' },
+  sub: { color: '#666', fontSize: 12 },
+  status: { backgroundColor: '#ED145B22', padding: 5, borderRadius: 5, borderWidth: 1, borderColor: '#ED145B' },
+  statusT: { color: '#ED145B', fontSize: 10, fontWeight: 'bold' },
+  empty: { color: '#444', textAlign: 'center', marginTop: 50 }
 });

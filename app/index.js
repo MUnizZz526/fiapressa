@@ -1,87 +1,55 @@
-import { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  Image, 
-  StyleSheet, 
-  ActivityIndicator, 
-  ScrollView, 
-  Dimensions 
-} from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
 import { useRouter } from 'expo-router';
-import { Colors } from '../constants/Colors';
-import { ButtonFiap } from '../components/ButtonFiap';
 
-import MinhaLogo from '../assets/images/logo_fiapressa.png';
-
-export default function Home() {
-  const [loading, setLoading] = useState(true);
+export default function Login() {
+  const [rm, setRm] = useState('');
+  const { signIn, user, loading } = useContext(AuthContext);
   const router = useRouter();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!loading && user) router.replace('/details');
+  }, [user, loading]);
 
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color={Colors.primary} />
-      </View>
-    );
-  }
+  if (loading) return null;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Image 
-        source={MinhaLogo} 
-        style={styles.logo}
-        resizeMode="contain" 
-      />
-      
-      <View style={styles.content}>
-        <Text style={styles.title}>FIAPressa</Text>
-        <Text style={styles.subtitle}>O lanche da FIAP na velocidade do seu aprendizado.</Text>
-        
-        <ButtonFiap title="Ver Cardápio" onPress={() => router.push('/details')} />
-        <ButtonFiap title="Meus Pedidos" outline onPress={() => router.push('/profile')} />
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+      <View style={styles.logoBox}>
+        <Image 
+          source={require('../assets/images/logo_fiapressa.png')} 
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
-    </ScrollView>
+
+      <View style={styles.form}>
+        <Text style={styles.label}>AUTENTICAÇÃO ACADÊMICA</Text>
+        <TextInput 
+          style={styles.input} 
+          placeholder="Digite seu RM" 
+          placeholderTextColor="#333" 
+          keyboardType="numeric"
+          maxLength={6}
+          value={rm}
+          onChangeText={setRm}
+        />
+        <TouchableOpacity style={styles.btn} onPress={() => signIn(rm)}>
+          <Text style={styles.btnText}>ENTRAR</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flexGrow: 1, 
-    backgroundColor: Colors.background, 
-    padding: 25,
-    alignItems: 'center' 
-  },
-  center: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center',
-    backgroundColor: Colors.background 
-  },
-  logo: {
-    width: Dimensions.get('window').width * 0.6,
-    height: 150,
-    marginTop: 40,
-    marginBottom: 20,
-  },
-  content: { 
-    width: '100%', 
-    alignItems: 'center' 
-  },
-  title: { 
-    fontSize: 28, 
-    fontWeight: 'bold', 
-    color: Colors.primary 
-  },
-  subtitle: { 
-    fontSize: 16, 
-    color: Colors.gray, 
-    textAlign: 'center', 
-    marginVertical: 15 
-  },
+  container: { flex: 1, backgroundColor: '#050505', justifyContent: 'center', padding: 40 },
+  logoBox: { alignItems: 'center', marginBottom: 60 },
+  logo: { width: 300, height: 120 },
+  form: { width: '100%' },
+  label: { color: '#ED145B', fontSize: 10, fontWeight: '900', marginBottom: 15, textAlign: 'center', letterSpacing: 2 },
+  input: { backgroundColor: '#0A0A0A', color: '#fff', padding: 22, borderRadius: 15, fontSize: 22, borderWidth: 1, borderColor: '#1A1A1A', marginBottom: 20, textAlign: 'center', fontWeight: 'bold' },
+  btn: { backgroundColor: '#ED145B', padding: 22, borderRadius: 15, alignItems: 'center', shadowColor: '#ED145B', shadowOpacity: 0.4, shadowRadius: 15, elevation: 8 },
+  btnText: { color: '#fff', fontWeight: '900', fontSize: 14, letterSpacing: 2 }
 });
