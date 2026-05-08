@@ -30,7 +30,7 @@ Escolhemos a operação de **Lanchonete/Restaurante da FIAP**. A escolha justifi
 * **[Cauã Ferreira Muniz]** – RM: [566527]
 * **[Henrique Mortari]** – RM: [564699]
 * **[João VItor Angeloti]** – RM: [563473]
-* **[Bernardo]** – RM: [565776]
+* **[Bernardo Berwanger]** – RM: [565776]
 
 ---
 
